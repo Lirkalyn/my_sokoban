@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "racket": "racket",
+        "curses.h": "c",
+        "random": "c"
+    }
+}
