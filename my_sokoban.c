@@ -31,6 +31,8 @@ int good_finder(char **map, char **map_backup);
 
 int O_placer(char **map, char **map_backup);
 
+int X_locked(char **map);
+
 int mod(char **map, int key, _Bool *out, int height)
 {
     int P[2];
@@ -45,7 +47,11 @@ int mod(char **map, int key, _Bool *out, int height)
     if (key == KEY_RIGHT)
         right(map, P, height);
     if (key == 'a') {
-        *out = 1;
+        //*out = 1;
+        endwin();
+    }
+    else if (key == 'b') {
+        //*out = 1;
         endwin();
     }
     else
@@ -73,17 +79,16 @@ int start(char **map, int height, int lenght, char *buf)
     keypad(stdscr, TRUE);
     while (out == 0) {
         O_placer(map, map_backup);
-        //key = getch();
-        key = (X_finder(map) == good_finder(map, map_backup)) ? 'a' : getch();
-        /*if (X_finder(map, map_backup) == good_finder(map, map_backup))
-            key = 'a';*/
+        key = (X_finder(map) == good_finder(map, map_backup)) ? 'a'
+            : (X_locked(map) >= X_finder(map)) ? 'b' : getch();
+        if (key == 'a' || key == 'b')
+            out = 1;
         if (key == ' ')
             out = restart(map_backup, height, lenght, buf);
         else
             mod(map, key, &out, height);
-        //key = getch();
     }
-    return 0;
+    return (key == 'b') ? 1 : 0;
 }
 
 int check_map(char *buf, int len, int *height, int *lenght)
