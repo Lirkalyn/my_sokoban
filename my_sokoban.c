@@ -46,12 +46,8 @@ int mod(char **map, int key, _Bool *out, int height)
         left(map, P, height);
     if (key == KEY_RIGHT)
         right(map, P, height);
-    if (key == 'a') {
-        //*out = 1;
-        endwin();
-    }
-    else if (key == 'b') {
-        //*out = 1;
+    if (key == 'a' || key == 'b') {
+        *out = 1;
         endwin();
     }
     else
@@ -81,8 +77,6 @@ int start(char **map, int height, int lenght, char *buf)
         O_placer(map, map_backup);
         key = (X_finder(map) == good_finder(map, map_backup)) ? 'a'
             : (X_locked(map) >= X_finder(map)) ? 'b' : getch();
-        if (key == 'a' || key == 'b')
-            out = 1;
         if (key == ' ')
             out = restart(map_backup, height, lenght, buf);
         else
