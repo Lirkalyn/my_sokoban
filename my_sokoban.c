@@ -10,28 +10,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <ncurses.h>
-
-char **my_str_to_word_array(char const *str);
-
-int start(char **map, int height, int lenght, char *buf);
-
-int P_finder(char **map, int *P);
-
-int up(char **map, int *P, int height);
-
-int down(char **map, int *P, int height);
-
-int left(char **map, int *P, int height);
-
-int right(char **map, int *P, int height);
-
-int X_finder(char **map);
-
-int good_finder(char **map, char **map_backup);
-
-int O_placer(char **map, char **map_backup);
-
-int X_locked(char **map);
+#include "my.h"
 
 int mod(char **map, int key, _Bool *out, int height)
 {
@@ -110,6 +89,7 @@ int main(int argc, char **argv)
     struct stat fileStat;
     char *buf;
     int adre_readedbyte[4];
+    int hei_len[2];
     char **test;
 
     if (argc != 2)
@@ -122,7 +102,7 @@ int main(int argc, char **argv)
         return 84;
     adre_readedbyte[1] = read(adre_readedbyte[0], buf, fileStat.st_size);
     buf[fileStat.st_size] = '\0';
-    if (check_map(buf, fileStat.st_size, &adre_readedbyte[2], &adre_readedbyte[3]))
+    if (check_map(buf, fileStat.st_size, &hei_len[0], &hei_len[1]))
         return 84;
-    return start(my_str_to_word_array(buf), adre_readedbyte[2], adre_readedbyte[3], buf);
+    return start(my_str_to_word_array(buf), hei_len[0], hei_len[1], buf);
 }
