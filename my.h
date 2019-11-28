@@ -19,5 +19,6 @@ int X_finder(char **map);
 int good_finder(char **map, char **map_backup);
 int O_placer(char **map, char **map_backup);
 int X_locked(char **map);
+int to_small(void);
 
 #endif

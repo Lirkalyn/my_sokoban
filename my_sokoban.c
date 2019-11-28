@@ -45,23 +45,25 @@ int restart(char **map_backup, int height, int lenght, char *buf)
 int start(char **map, int height, int lenght, char *buf)
 {
     char **map_backup = my_str_to_word_array(buf);
-    int key = 0;
-    _Bool out = 0;
+    int key_pos[3] = {[0 ... 2] = 0};
 
     initscr();
     for (int i = 0; i < height; printw(map[i++]));
     refresh();
     keypad(stdscr, TRUE);
-    while (out == 0) {
+    for (_Bool out = 0; out != 1;) {
         O_placer(map, map_backup);
-        key = (X_finder(map) == good_finder(map, map_backup)) ? 'a'
+        getmaxyx(stdscr, key_pos[1], key_pos[2]);
+        if (key_pos[1] < height || key_pos[2] < lenght)
+            to_small();
+        key_pos[0] = (X_finder(map) == good_finder(map, map_backup)) ? 'a'
             : (X_locked(map) >= X_finder(map)) ? 'b' : getch();
-        if (key == ' ')
+        if (key_pos[0] == ' ')
             out = restart(map_backup, height, lenght, buf);
         else
-            mod(map, key, &out, height);
+            mod(map, key_pos[0], &out, height);
     }
-    return (key == 'b') ? 1 : 0;
+    return (key_pos[0] == 'b') ? 1 : 0;
 }
 
 int check_map(char *buf, int len, int *height, int *lenght)
@@ -89,7 +91,7 @@ int main(int argc, char **argv)
     struct stat fileStat;
     char *buf;
     int adre_readedbyte[4];
-    int hei_len[2];
+    int hei_len[2] = {[0 ... 1] = 0};
     char **test;
 
     if (argc != 2)

@@ -73,3 +73,13 @@ int O_placer(char **map, char **map_backup)
     refresh();
     return 0;
 }
+
+int to_small(void)
+{
+    char *str = "The terminal is too small, please make it bigger.";
+
+    clear();
+    mvprintw((LINES / 2), ((COLS - 32) / 2), str);
+    refresh();
+    return 0;
+}
