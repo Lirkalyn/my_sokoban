@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 
-int X_locked(char **map)
+int x_locked(char **map)
 {
     int lock = 0;
 
@@ -32,7 +32,7 @@ int X_locked(char **map)
     return lock;
 }
 
-int X_finder(char **map)
+int x_finder(char **map)
 {
     int x = 0;
 
@@ -57,7 +57,7 @@ int good_finder(char **map, char **map_backup)
     return good;
 }
 
-int O_placer(char **map, char **map_backup, int height, int lenght)
+int o_placer(char **map, char **map_backup, int height, int lenght)
 {
     for (int i = 0; map[i] != NULL; i++)
         for (int j = 0; map[i][j] != '\n'; j++) {

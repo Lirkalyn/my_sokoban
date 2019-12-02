@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 
-int P_finder(char **map, int *P)
+int p_finder(char **map, int *P)
 {
     int i;
     int j;

@@ -16,7 +16,7 @@ int mod(char **map, int key_out[], int height, int lenght)
 {
     int P[2];
 
-    P_finder(map, P);
+    p_finder(map, P);
     if (key_out[0] == KEY_UP)
         up(map, P, height, lenght);
     if (key_out[0] == KEY_DOWN)
@@ -50,12 +50,12 @@ int start(char **map, int height, int lenght, char *buf)
     initscr();
     keypad(stdscr, TRUE);
     for (key_pos_out[3] = 0; key_pos_out[3] != 1;) {
-        O_placer(map, map_backup, height, lenght);
+        o_placer(map, map_backup, height, lenght);
         getmaxyx(stdscr, key_pos_out[1], key_pos_out[2]);
         if (key_pos_out[1] < height || key_pos_out[2] < lenght)
             to_small();
-        key_pos_out[0] = (X_finder(map) == good_finder(map, map_backup)) ? 'a'
-            : (X_locked(map) >= X_finder(map)) ? 'b' : getch();
+        key_pos_out[0] = (x_finder(map) == good_finder(map, map_backup)) ? 'a'
+            : (x_locked(map) >= x_finder(map)) ? 'b' : getch();
         if (key_pos_out[0] == ' ')
             key_pos_out[3] = restart(map_backup, height, lenght, buf);
         else

@@ -10,15 +10,15 @@
 
 char **my_str_to_word_array(char const *str);
 int start(char **map, int height, int lenght, char *buf);
-int P_finder(char **map, int *P);
+int p_finder(char **map, int *P);
 int up(char **map, int *P, int height, int lenght);
 int down(char **map, int *P, int height, int lenght);
 int left(char **map, int *P, int height, int lenght);
 int right(char **map, int *P, int height, int lenght);
-int X_finder(char **map);
+int x_finder(char **map);
 int good_finder(char **map, char **map_backup);
-int O_placer(char **map, char **map_backup, int height, int lenght);
-int X_locked(char **map);
+int o_placer(char **map, char **map_backup, int height, int lenght);
+int x_locked(char **map);
 int to_small(void);
 
 #endif
