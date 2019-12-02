@@ -57,7 +57,7 @@ int good_finder(char **map, char **map_backup)
     return good;
 }
 
-int O_placer(char **map, char **map_backup)
+int O_placer(char **map, char **map_backup, int height, int lenght)
 {
     for (int i = 0; map[i] != NULL; i++)
         for (int j = 0; map[i][j] != '\n'; j++) {
@@ -69,7 +69,7 @@ int O_placer(char **map, char **map_backup)
         }
     clear();
     for (int i = 0; map[i] != NULL; i++)
-        printw(map[i]);
+        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
     refresh();
     return 0;
 }
@@ -79,7 +79,7 @@ int to_small(void)
     char *str = "The terminal is too small, please make it bigger.";
 
     clear();
-    mvprintw((LINES / 2), ((COLS - 32) / 2), str);
+    mvprintw((LINES / 2), ((COLS - 49) / 2), str);
     refresh();
     return 0;
 }

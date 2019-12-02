@@ -12,21 +12,21 @@
 #include <ncurses.h>
 #include "my.h"
 
-int mod(char **map, int key, _Bool *out, int height)
+int mod(char **map, int key_out[], int height, int lenght)
 {
     int P[2];
 
     P_finder(map, P);
-    if (key == KEY_UP)
-        up(map, P, height);
-    if (key == KEY_DOWN)
-        down(map, P, height);
-    if (key == KEY_LEFT)
-        left(map, P, height);
-    if (key == KEY_RIGHT)
-        right(map, P, height);
-    if (key == 'a' || key == 'b') {
-        *out = 1;
+    if (key_out[0] == KEY_UP)
+        up(map, P, height, lenght);
+    if (key_out[0] == KEY_DOWN)
+        down(map, P, height, lenght);
+    if (key_out[0] == KEY_LEFT)
+        left(map, P, height, lenght);
+    if (key_out[0] == KEY_RIGHT)
+        right(map, P, height, lenght);
+    if (key_out[0] == 'a' || key_out[0] == 'b') {
+        key_out[3] = 1;
         endwin();
     }
     else
@@ -45,25 +45,23 @@ int restart(char **map_backup, int height, int lenght, char *buf)
 int start(char **map, int height, int lenght, char *buf)
 {
     char **map_backup = my_str_to_word_array(buf);
-    int key_pos[3] = {[0 ... 2] = 0};
+    int key_pos_out[4] = {[0 ... 3] = 0};
 
     initscr();
-    for (int i = 0; i < height; printw(map[i++]));
-    refresh();
     keypad(stdscr, TRUE);
-    for (_Bool out = 0; out != 1;) {
-        O_placer(map, map_backup);
-        getmaxyx(stdscr, key_pos[1], key_pos[2]);
-        if (key_pos[1] < height || key_pos[2] < lenght)
+    for (key_pos_out[3] = 0; key_pos_out[3] != 1;) {
+        O_placer(map, map_backup, height, lenght);
+        getmaxyx(stdscr, key_pos_out[1], key_pos_out[2]);
+        if (key_pos_out[1] < height || key_pos_out[2] < lenght)
             to_small();
-        key_pos[0] = (X_finder(map) == good_finder(map, map_backup)) ? 'a'
+        key_pos_out[0] = (X_finder(map) == good_finder(map, map_backup)) ? 'a'
             : (X_locked(map) >= X_finder(map)) ? 'b' : getch();
-        if (key_pos[0] == ' ')
-            out = restart(map_backup, height, lenght, buf);
+        if (key_pos_out[0] == ' ')
+            key_pos_out[3] = restart(map_backup, height, lenght, buf);
         else
-            mod(map, key_pos[0], &out, height);
+            mod(map, key_pos_out, height, lenght);
     }
-    return (key_pos[0] == 'b') ? 1 : 0;
+    return (key_pos_out[0] == 'b') ? 1 : 0;
 }
 
 int check_map(char *buf, int len, int *height, int *lenght)

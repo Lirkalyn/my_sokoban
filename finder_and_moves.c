@@ -23,7 +23,7 @@ int P_finder(char **map, int *P)
     return 1;
 }
 
-int up(char **map, int *P, int height)
+int up(char **map, int *P, int height, int lenght)
 {
     if (map[(P[0] - 1)][P[1]] == '#')
         return 0;
@@ -41,12 +41,12 @@ int up(char **map, int *P, int height)
         }
     }
     clear();
-    for (int i = 0; i < height; i++)
-        printw(map[i]);
+    for (int i = 0; map[i] != NULL; i++)
+        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
     refresh();
 }
 
-int down(char **map, int *P, int height)
+int down(char **map, int *P, int height, int lenght)
 {
     if (map[(P[0] + 1)][P[1]] == '#')
         return 0;
@@ -64,12 +64,12 @@ int down(char **map, int *P, int height)
         }
     }
     clear();
-    for (int i = 0; i < height; i++)
-        printw(map[i]);
+    for (int i = 0; map[i] != NULL; i++)
+        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
     refresh();
 }
 
-int left(char **map, int *P, int height)
+int left(char **map, int *P, int height, int lenght)
 {
     if (map[P[0]][(P[1] - 1)] == '#')
         return 0;
@@ -87,12 +87,12 @@ int left(char **map, int *P, int height)
         }
     }
     clear();
-    for (int i = 0; i < height; i++)
-        printw(map[i]);
+    for (int i = 0; map[i] != NULL; i++)
+        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
     refresh();
 }
 
-int right(char **map, int *P, int height)
+int right(char **map, int *P, int height, int lenght)
 {
     if (map[P[0]][(P[1] + 1)] == '#')
         return 0;
@@ -110,7 +110,7 @@ int right(char **map, int *P, int height)
         }
     }
     clear();
-    for (int i = 0; i < height; i++)
-        printw(map[i]);
+    for (int i = 0; map[i] != NULL; i++)
+        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
     refresh();
 }
