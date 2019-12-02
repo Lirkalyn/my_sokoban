@@ -42,7 +42,7 @@ int up(char **map, int *P, int height, int lenght)
     }
     clear();
     for (int i = 0; map[i] != NULL; i++)
-        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
+        mvprintw(i, 0, map[i]);
     refresh();
 }
 
@@ -65,7 +65,7 @@ int down(char **map, int *P, int height, int lenght)
     }
     clear();
     for (int i = 0; map[i] != NULL; i++)
-        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
+        mvprintw(i, 0, map[i]);
     refresh();
 }
 
@@ -88,7 +88,7 @@ int left(char **map, int *P, int height, int lenght)
     }
     clear();
     for (int i = 0; map[i] != NULL; i++)
-        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
+        mvprintw(i, 0, map[i]);
     refresh();
 }
 
@@ -111,6 +111,6 @@ int right(char **map, int *P, int height, int lenght)
     }
     clear();
     for (int i = 0; map[i] != NULL; i++)
-        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
+        mvprintw(i, 0, map[i]);
     refresh();
 }

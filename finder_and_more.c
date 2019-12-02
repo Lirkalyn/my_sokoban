@@ -69,7 +69,7 @@ int o_placer(char **map, char **map_backup, int height, int lenght)
         }
     clear();
     for (int i = 0; map[i] != NULL; i++)
-        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
+        mvprintw(i, 0, map[i]);
     refresh();
     return 0;
 }
