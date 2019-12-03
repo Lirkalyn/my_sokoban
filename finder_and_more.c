@@ -15,17 +15,14 @@ int x_locked(char **map)
     for (int i = 0; map[i] != NULL; i++)
         for (int j = 0; map[i][j] != '\n'; j++) {
             if (map[i][j] == 'X') {
-                if ((map[(i - 1)][j] == 'X' || map[(i - 1)][j] == '#')
+                if (((map[(i - 1)][j] == 'X' || map[(i - 1)][j] == '#')
                     && (map[i][(j - 1)] == 'X' || map[i][(j - 1)] == '#'))
-                    lock += 1;
-                if ((map[(i - 1)][j] == 'X' || map[(i - 1)][j] == '#')
+                        || ((map[(i - 1)][j] == 'X' || map[(i - 1)][j] == '#')
                     && (map[i][(j + 1)] == 'X' || map[i][(j + 1)] == '#'))
-                    lock += 1;
-                if ((map[(i + 1)][j] == 'X' || map[(i + 1)][j] == '#')
+                        || ((map[(i + 1)][j] == 'X' || map[(i + 1)][j] == '#')
                     && (map[i][(j - 1)] == 'X' || map[i][(j - 1)] == '#'))
-                    lock += 1;
-                if ((map[(i + 1)][j] == 'X' || map[(i + 1)][j] == '#')
-                    && (map[i][(j + 1)] == 'X' || map[i][(j + 1)] == '#'))
+                        || ((map[(i + 1)][j] == 'X' || map[(i + 1)][j] == '#')
+                    && (map[i][(j + 1)] == 'X' || map[i][(j + 1)] == '#')))
                     lock += 1;
             }
         }
@@ -62,14 +59,16 @@ int o_placer(char **map, char **map_backup, int height, int lenght)
     for (int i = 0; map[i] != NULL; i++)
         for (int j = 0; map[i][j] != '\n'; j++) {
             if (map_backup[i][j] == 'O')
-                if (map[i][j] == 'P' || map[i][j] == 'X')
-                    return 0;
+                if (map[i][j] == 'P')
+                    map[i][j] == 'P';
+                else if (map[i][j] == 'X')
+                    map[i][j] == 'X';
                 else
                     map[i][j] = 'O';
         }
     clear();
     for (int i = 0; map[i] != NULL; i++)
-        mvprintw(i, 0, map[i]);
+        mvprintw((((LINES - height) / 2) + i), ((COLS - lenght) / 2), map[i]);
     refresh();
     return 0;
 }

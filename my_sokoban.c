@@ -55,7 +55,7 @@ int start(char **map, int height, int lenght, char *buf)
         if (key_pos_out[1] < height || key_pos_out[2] < lenght)
             to_small();
         key_pos_out[0] = (x_finder(map) == good_finder(map, map_backup)) ? 'a'
-            : (x_locked(map) >= x_finder(map)) ? 'b' : getch();
+            : (x_locked(map) == x_finder(map)) ? 'b' : getch();
         if (key_pos_out[0] == ' ')
             key_pos_out[3] = restart(map_backup, height, lenght, buf);
         else
